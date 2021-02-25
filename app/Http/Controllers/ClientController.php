@@ -34,7 +34,24 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client              = new Client();
+        $client->nome        = $request->nome;
+        $client->email       = $request->email;
+        $client->telefone    = $request->telefone;
+        $client->save();
+        if ($client) {
+            return response()->json(
+                [
+                    'message' => 'Cliente cadastrado com sucesso!'
+                ], 201
+            );
+        } else {
+            return response()->json(
+                [
+                    'message' => 'Serviço indisponível, tente novamente!'
+                ], 500
+            );
+        }
     }
 
     /**
