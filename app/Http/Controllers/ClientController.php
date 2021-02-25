@@ -14,7 +14,16 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        if (count($clients) == 0) {
+            return response()->json(
+                [
+                    'message' => 'não existem clientes cadastrados'
+                ],200
+            );
+        } else {
+            return response()->json($clients, 200);
+        }
     }
 
     /**
