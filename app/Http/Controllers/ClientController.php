@@ -18,7 +18,7 @@ class ClientController extends Controller
         if (count($clients) == 0) {
             return response()->json(
                 [
-                    'message' => 'não existem clientes cadastrados'
+                    'message' => 'Não existem clientes cadastrados'
                 ],200
             );
         } else {
@@ -42,7 +42,7 @@ class ClientController extends Controller
         if ($client) {
             return response()->json(
                 [
-                    'message' => 'Cliente cadastrado com sucesso!'
+                    'message' => 'Registro cadastrado com sucesso!'
                 ], 201
             );
         } else {
@@ -66,34 +66,32 @@ class ClientController extends Controller
         if (!$client) {
             return response()->json(
                 [
-                    'message' => 'Cliente não encontrado.'
+                    'message' => 'Registro não encontrado.'
                 ], 404
             );
         } else {
-            return response()->json($client);
+            return response()->json($client, 200);
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Client $client)
-    {
-        //
+            $client = Client::find($id);
+            if (!$client) {
+                return response()->json(
+                    [
+                        'message' => 'Registro não encontrado'
+                    ], 404
+                );
+            }
+            $client->update($request->all());
+            return response()->json($client, 200);
     }
 }
