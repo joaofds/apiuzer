@@ -57,12 +57,21 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show($id)
     {
-        //
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => 'Cliente não encontrado.'
+                ], 404
+            );
+        } else {
+            return response()->json($client);
+        }
     }
 
     /**
