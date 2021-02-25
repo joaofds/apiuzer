@@ -14,17 +14,16 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $clients = Client::all();
+        if (count($clients) == 0) {
+            return response()->json(
+                [
+                    'message' => 'Não existem clientes cadastrados'
+                ],200
+            );
+        } else {
+            return response()->json($clients, 200);
+        }
     }
 
     /**
@@ -35,51 +34,64 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client              = new Client();
+        $client->nome        = $request->nome;
+        $client->email       = $request->email;
+        $client->telefone    = $request->telefone;
+        $client->save();
+        if ($client) {
+            return response()->json(
+                [
+                    'message' => 'Registro cadastrado com sucesso!'
+                ], 201
+            );
+        } else {
+            return response()->json(
+                [
+                    'message' => 'Serviço indisponível, tente novamente!'
+                ], 500
+            );
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
-    {
-        //
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => 'Registro não encontrado.'
+                ], 404
+            );
+        } else {
+            return response()->json($client, 200);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Client $client)
-    {
-        //
+            $client = Client::find($id);
+            if (!$client) {
+                return response()->json(
+                    [
+                        'message' => 'Registro não encontrado'
+                    ], 404
+                );
+            }
+            $client->update($request->all());
+            return response()->json($client, 200);
     }
 }
