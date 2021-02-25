@@ -18,7 +18,7 @@ class ClientController extends Controller
         if (count($clients) == 0) {
             return response()->json(
                 [
-                    'message' => 'Não existem clientes cadastrados'
+                    'message' => 'Não existem clients cadastrados'
                 ],200
             );
         } else {
