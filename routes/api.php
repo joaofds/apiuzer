@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 Route::prefix('/v1')->group(function () {
     Route::get('/', function () {
         return response()->json(
-            ['message' => 'api clientes'], 200
+            ['message' => 'api clients'], 200
         );
     });
 
-    Route::resource('clientes', 'ClientController')->except(['edit', 'create']);
+    Route::resource('clients', 'ClientController')->except(['edit', 'create']);
 });
