@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/api/v1');
+    return view('clients.index');
 });
+
+Route::resource('clientes', 'AppClientController');
