@@ -13,7 +13,10 @@ class AppClientController extends Controller
      */
     public function index()
     {
-        return view('clients.list');
+        $uri = '/clients';
+        $data = self::initRequest($uri);
+        $collection = collect(json_decode($data, true));
+        return view('clients.list')->with('data', $collection);
     }
 
     /**
@@ -80,5 +83,25 @@ class AppClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Init CURL request to API
+     *
+     * @param $uri
+     * @param null $data
+     * @return bool|string
+     */
+    public function initRequest($uri, $data = null)
+    {
+        $url = env('API_URL');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url.$uri);
+        curl_setopt($ch, CURLOPT_POST, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec ($ch);
+        curl_close ($ch);
+        return $response;
     }
 }
