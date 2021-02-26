@@ -15,8 +15,8 @@ class AppClientController extends Controller
     public function index()
     {
         $uri = '/clients';
-        $data = self::initRequest($uri);
-        $collection = collect(json_decode($data, true));
+        $response = self::initRequest($uri);
+        $collection = collect(json_decode($response, true));
         return view('clients.index')->with('data', $collection);
     }
 
@@ -63,8 +63,8 @@ class AppClientController extends Controller
     public function edit($id)
     {
         $uri = "/clients/$id";
-        $data = self::initRequest($uri);
-        $collection = collect(json_decode($data, true));
+        $response = self::initRequest($uri);
+        $collection = collect(json_decode($response, true));
         return view('clients.create')->with('data', $collection);
     }
 
@@ -101,7 +101,12 @@ class AppClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $uri = "/clients/$id";
+        $method = "DELETE";
+
+        $response = self::initRequest($uri, $method);
+        $collection = collect(json_decode($response, true));
+        return redirect()->back()->with('data', $collection);
     }
 
     /**
@@ -126,6 +131,9 @@ class AppClientController extends Controller
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
                 if ($data)
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                break;
+            case 'DELETE':
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
                 break;
         }
 

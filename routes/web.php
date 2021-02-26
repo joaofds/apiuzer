@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('clients.home');
 })->name('home');
 
-Route::resource('clientes', 'AppClientController');
+Route::get('/clientes/delete/{id}', 'AppClientController@destroy')->name('clientes.destroy');
+Route::resource('clientes', 'AppClientController')->except(['destroy']);

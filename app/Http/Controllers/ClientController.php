@@ -94,4 +94,24 @@ class ClientController extends Controller
             $client->update($request->all());
             return response()->json($client, 200);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => 'Registro não encontrado'
+                ], 404
+            );
+        }
+        $client->delete();
+        return response()->json(['message' => 'Registro deletado com sucesso.'], 200);
+    }
 }
