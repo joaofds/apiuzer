@@ -4,7 +4,6 @@
 
 ## Como rodar o projeto?
 
-
     1 Clonar o repositorio:
     git clone https://github.com/joaofds/apiuzer.git
     
@@ -26,3 +25,6 @@
     curl --location --request GET 'localhost/api/v1/clientes/1'
     curl --location --request PUT 'localhost/api/v1/clientes/2' --header 'Content-Type: application/json' --data-raw '{ "nome":"User"}'
     curl --location --request DELETE 'localhost/api/v1/clientes/1'
+
+    Obs: a API começa em /api/v1 e o front-end que a consome
+    está em /.
