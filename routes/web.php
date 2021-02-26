@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('clients.index');
-});
+    return view('clients.home');
+})->name('home');
 
 Route::resource('clientes', 'AppClientController');

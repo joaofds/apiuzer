@@ -16,7 +16,7 @@ class AppClientController extends Controller
         $uri = '/clients';
         $data = self::initRequest($uri);
         $collection = collect(json_decode($data, true));
-        return view('clients.list')->with('data', $collection);
+        return view('clients.index')->with('data', $collection);
     }
 
     /**
