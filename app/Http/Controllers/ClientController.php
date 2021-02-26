@@ -87,7 +87,7 @@ class ClientController extends Controller
             if (!$client) {
                 return response()->json(
                     [
-                        'message' => 'Registro não encontrado'
+                        'message' => 'Registro não encontrado.'
                     ], 404
                 );
             }
@@ -96,18 +96,25 @@ class ClientController extends Controller
     }
 
     /**
+
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+
+     * Destroy thhe specified resource in storage
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+
      */
     public function destroy($id)
     {
         $client = Client::find($id);
-        if (!$client) {
+        if(!$client) {
             return response()->json(
                 [
-                    'message' => 'Registro não encontrado'
+                    'message'   => 'Registro não encontrado.'
                 ], 404
             );
         }
