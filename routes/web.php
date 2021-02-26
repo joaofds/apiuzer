@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return redirect('/api/v1');
-});
+    return view('clients.home');
+})->name('home');
+
+Route::get('/clientes/delete/{id}', 'AppClientController@destroy')->name('clientes.destroy');
+Route::resource('clientes', 'AppClientController')->except(['destroy']);
