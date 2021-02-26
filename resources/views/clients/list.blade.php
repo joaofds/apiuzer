@@ -4,6 +4,7 @@
         <div class="container">
             <h1 class="display-4">Clientes</h1>
             <p class="lead">Listagem de clientes cadastrados na API.</p>
+            <a href="{{ route('clientes.create') }}" class="btn btn-info"><i class="bi bi-plus"></i> Novo Registro</a>
         </div>
     </div>
 
