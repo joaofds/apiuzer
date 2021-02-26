@@ -10,6 +10,7 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="row">
+                @if(!isset($data['message']))
                 <table class="table">
                     <thead class="bg-info">
                         <tr>
@@ -39,6 +40,11 @@
                     </tbody>
                     @endforeach
                 </table>
+                @else
+                    <div class="alert alert-danger" role="alert">
+                        Nenhum registro encontrado.
+                    </div>
+                @endif
             </div>
         </div>
     </div>
