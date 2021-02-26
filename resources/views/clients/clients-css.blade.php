@@ -35,7 +35,6 @@
         box-shadow: none;
     }
 
-
     .table td a {
         cursor: pointer;
         display: inline-block;
@@ -54,4 +53,31 @@
     .table td i {
         font-size: 19px;
     }
+
+    .btn-info,
+    .btn-info:hover,
+    .btn-info:active,
+    .btn-info:visited,
+    .btn-info:focus {
+        border-color: #028472;
+    }
+
+    .btn-secondary,
+    .btn-secondary:hover,
+    .btn-secondary:active,
+    .btn-secondary:visited,
+    .btn-secondary:focus {
+        background-color: #818182;
+        border-color: #818182;
+    }
+
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:visited,
+    .btn-primary:focus {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
 </style>
