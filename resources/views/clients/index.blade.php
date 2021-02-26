@@ -11,12 +11,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-1 col mr-5">
-                    <a href="#" class="btn btn-lg">
+                    <a href="{{ route('clientes.index') }}" class="btn btn-lg">
                         <i class="bi bi-people"></i>
                     </a>
                 </div>
                 <div class="col-sm-1 col">
-                    <a href="#" class="btn btn-lg">
+                    <a href="{{ route('clients.index') }}" class="btn btn-lg">
                         <i class="bi bi-code-slash"></i>
                     </a>
                 </div>
