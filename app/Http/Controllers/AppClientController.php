@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
 
 class AppClientController extends Controller
@@ -54,6 +55,20 @@ class AppClientController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $uri = "/clients/$id";
+        $data = self::initRequest($uri);
+        $collection = collect(json_decode($data, true));
+        return view('clients.create')->with('data', $collection);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,7 +77,20 @@ class AppClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $uri = "/clients/$id";
+        $method = "PUT";
+
+        $data               = [];
+        $data['nome']       = $request->nome;
+        $data['email']      = $request->email;
+        $data['telefone']   = $request->telefone;
+        $data = json_encode($data);
+
+        $response = self::initRequest($uri, $method, $data);
+        if ($response) {
+            return redirect()->route('clientes.index');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -91,12 +119,16 @@ class AppClientController extends Controller
         switch ($method) {
             case 'POST':
                 curl_setopt($ch, CURLOPT_POST, 1);
-                if ($data) {
+                if ($data)
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                    break;
-                }
-
+                break;
+            case 'PUT':
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data)
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                break;
         }
+
         curl_setopt($ch, CURLOPT_URL, $url.$uri);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

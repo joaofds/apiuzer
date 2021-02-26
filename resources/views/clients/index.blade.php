@@ -35,7 +35,7 @@
                         <td>{{ $cliente['created_at'] }}</td>
                         <td>{{ $cliente['updated_at'] }}</td>
                         <td>
-                            <a class="edit" id="edit" title="Edit" data-toggle="tooltip"><i class="bi bi-pencil-fill"></i></a>
+                            <a href="{{ route('clientes.edit', $cliente['id']) }}" class="edit" id="edit" title="Edit" data-toggle="tooltip"><i class="bi bi-pencil-fill"></i></a>
                             <a class="delete" id="delete"  title="Delete" data-toggle="tooltip"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
